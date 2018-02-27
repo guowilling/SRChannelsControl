@@ -33,7 +33,6 @@
 #pragma mark - Lazy Load
 
 - (NSMutableArray<UILabel *> *)titleLabels {
-    
     if (!_titleLabels) {
         _titleLabels = [NSMutableArray array];
     }
@@ -43,7 +42,6 @@
 #pragma mark - Init Methods
 
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles titleStyle:(SRChannelsTitleStyle *)titleStyle {
-    
     if (self = [super initWithFrame:frame]) {
         _titles = titles;
         _titleStyle = titleStyle;
@@ -53,7 +51,6 @@
 }
 
 - (void)setupUI {
-    
     self.backgroundColor = [UIColor whiteColor];
     
     [self setupContainerScrollView];
@@ -68,17 +65,18 @@
 }
 
 - (void)setupContainerScrollView{
-    
     UIScrollView *containerScrollView = [[UIScrollView alloc] init];
     containerScrollView.frame = self.bounds;
     containerScrollView.showsHorizontalScrollIndicator = NO;
     containerScrollView.scrollsToTop = NO;
     [self addSubview:containerScrollView];
     _containerScrollView = containerScrollView;
+    _containerScrollView.layer.borderWidth = self.titleStyle.borderWidth;
+    _containerScrollView.layer.borderColor = self.titleStyle.borderColor.CGColor;
+    _containerScrollView.layer.cornerRadius = self.titleStyle.cornerRadius;
 }
 
 - (void)setupTitleLabels {
-    
     for (int i = 0; i < self.titles.count; i++) {
         NSString *title = self.titles[i];
         UILabel *titleLabel = [[UILabel alloc] init];
@@ -96,7 +94,6 @@
 }
 
 - (void)setupTitleLabelsFrame {
-    
     CGFloat labelX = 0;
     CGFloat labelY = 0;
     CGFloat labelW = self.bounds.size.width / self.titleLabels.count;
@@ -122,6 +119,14 @@
         if (self.titleStyle.isTitleScaling && i == 0) {
             label.transform = CGAffineTransformMakeScale(self.titleStyle.scaleRange, self.titleStyle.scaleRange);
         }
+        
+        if (self.titleStyle.isTitleSeparatorLineDisplayed) {
+            if ( i != self.titles.count - 1) {
+                UIView *line = [[UIView alloc] initWithFrame:CGRectMake(labelX + labelW - 0.5, 0, 1, self.titleStyle.titleHeight)];
+                line.backgroundColor = [UIColor darkGrayColor];
+                [_containerScrollView addSubview:line];
+            }
+        }
     }
     
     if (self.titleStyle.isScrollEnabled) {
@@ -130,7 +135,6 @@
 }
 
 - (void)setupBottomLine {
-    
     if (!self.titleStyle.isBottomLineDisplayed) {
         return;
     }
@@ -145,7 +149,6 @@
 }
 
 - (void)setupSlider {
-    
     if (!self.titleStyle.isSliderDisplayed) {
         return;
     }
@@ -170,7 +173,6 @@
 #pragma mark - Monitor Methods
 
 - (void)didTapTitleLabel:(UIGestureRecognizer *)tapGes {
-    
     UILabel *currentLabel = (UILabel *)tapGes.view;
     if (self.currentIndex == currentLabel.tag) {
         return;
@@ -216,7 +218,6 @@
 #pragma mark - Assist Methods
 
 - (void)adjustPosition:(UILabel *)tapLabel {
-    
     if (!self.titleStyle.isScrollEnabled) {
         return;
     }
@@ -234,7 +235,6 @@
 #pragma mark - Public Methods
 
 - (void)scrollFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress {
-    
     UILabel *lastLabel = self.titleLabels[fromIndex];
     UILabel *toLabel = self.titleLabels[toIndex];
     
@@ -283,11 +283,12 @@
 }
 
 - (void)didEndScrollAtIndex:(NSInteger)atIndex {
-    
     UILabel *lastLabel = self.titleLabels[self.currentIndex];
     UILabel *atLabel = self.titleLabels[atIndex];
     lastLabel.textColor = self.titleStyle.titleNormalColor;
     atLabel.textColor = self.titleStyle.titleSelectdColor;
+    lastLabel.backgroundColor = [UIColor clearColor];
+    atLabel.backgroundColor = self.titleStyle.titleSelectdBgColor;
     
     self.currentIndex = atIndex;
     

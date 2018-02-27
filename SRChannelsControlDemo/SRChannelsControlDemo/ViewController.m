@@ -19,17 +19,14 @@
 @implementation ViewController
 
 - (BOOL)prefersStatusBarHidden {
-
     return YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
     return 0.2;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     NSInteger row = indexPath.row;
     SRChannelsTitleStyle *titleStyle = [SRChannelsTitleStyle defaultChannelsTitleStyle];
     switch (row) {
@@ -63,7 +60,15 @@
             titleStyle.isBottomLineDisplayed = false;
             titleStyle.isSliderDisplayed = true;
             break;
-        default:
+        case 5:
+            titleStyle.isScrollEnabled = false;
+            titleStyle.isNavigationTitleView = YES;
+            titleStyle.isTitleSeparatorLineDisplayed = YES;
+            titleStyle.titleWitdh = 240;
+            titleStyle.titleHeight = 36;
+            titleStyle.borderWidth = 1;
+            titleStyle.borderColor = [UIColor blackColor];
+            titleStyle.cornerRadius = 2;
             break;
     }
     [self.navigationController pushViewController:[[TestViewController alloc] initWithTitleStyle:titleStyle] animated:YES];

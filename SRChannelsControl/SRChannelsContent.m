@@ -27,7 +27,6 @@ static NSString * const kContentCellID = @"contentCellID";
 @implementation SRChannelsContent
 
 - (instancetype)initWithFrame:(CGRect)frame childVCs:(NSArray *)childVCs parentVC:(UIViewController *)parentVC {
-    
     if (self = [super initWithFrame:frame]) {
         _childVCs = childVCs;
         _parentVC = parentVC;
@@ -37,7 +36,6 @@ static NSString * const kContentCellID = @"contentCellID";
 }
 
 - (void)setupUI {
-    
     for (UIViewController *vc in self.childVCs) {
         [self.parentVC addChildViewController:vc];
     }
@@ -62,17 +60,14 @@ static NSString * const kContentCellID = @"contentCellID";
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
     return self.childVCs.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kContentCellID forIndexPath:indexPath];
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
@@ -86,13 +81,11 @@ static NSString * const kContentCellID = @"contentCellID";
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    
     self.disableScroll = NO;
     self.startOffsetX = scrollView.contentOffset.x;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     int floorIndex = floor(scrollView.contentOffset.x / scrollView.frame.size.width);
     if (floorIndex < 0 || floorIndex > self.childVCs.count - 1) {
         return;
@@ -119,7 +112,6 @@ static NSString * const kContentCellID = @"contentCellID";
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
     if (decelerate) {
         return;
     }
@@ -127,12 +119,10 @@ static NSString * const kContentCellID = @"contentCellID";
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
     [self collectionViewDidEndScroll];
 }
 
 - (void)collectionViewDidEndScroll {
-    
     NSInteger endAtIndex = (_contentCollectionView.contentOffset.x / _contentCollectionView.bounds.size.width);
     if ([self.delegate respondsToSelector:@selector(channelsContent:didEndScrollAtIndex:)]) {
         [self.delegate channelsContent:self didEndScrollAtIndex:endAtIndex];
@@ -142,7 +132,6 @@ static NSString * const kContentCellID = @"contentCellID";
 #pragma mark - Public Methods
 
 - (void)didSelectIndex:(NSInteger)index {
-    
     self.disableScroll = true;
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];

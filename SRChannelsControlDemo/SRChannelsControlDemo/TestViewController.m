@@ -20,12 +20,10 @@
 @implementation TestViewController
 
 - (BOOL)prefersStatusBarHidden {
-    
     return YES;
 }
 
 - (instancetype)initWithTitleStyle:(SRChannelsTitleStyle *)titleStyle {
-    
     if (self = [super initWithNibName:nil bundle:nil]) {
         _titleStyle = titleStyle;
     }
@@ -33,10 +31,10 @@
 }
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     NSArray *titles;
@@ -44,6 +42,9 @@
         titles = @[@"Title1", @"Title2", @"Title3", @"Title4", @"Title5", @"Title6", @"Title7", @"Title8", @"Title999"];
     } else {
         titles = @[@"Title1", @"Title2", @"Title3", @"Title4", @"Title5"];
+    }
+    if (self.titleStyle.isNavigationTitleView) {
+        titles = @[@"Title1", @"Title2", @"Title3"];
     }
     CGRect channelsControlFrame = CGRectMake(0, 44, self.view.bounds.size.width, self.view.bounds.size.height - 44);
     
@@ -55,6 +56,10 @@
     }
     SRChannelsControl *channelsControl = [SRChannelsControl channelsControlWithFrame:channelsControlFrame titles:titles titleStyle:self.titleStyle childVCs:childVCs parentVC:self];
     [self.view addSubview:channelsControl];
+    
+    if (self.titleStyle.isNavigationTitleView) {
+        self.navigationItem.titleView = (UIView *)channelsControl.channelsTitle;
+    }
 }
 
 @end

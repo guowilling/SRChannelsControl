@@ -31,44 +31,44 @@
     SRChannelsTitleStyle *titleStyle = [SRChannelsTitleStyle defaultChannelsTitleStyle];
     switch (row) {
         case 0:
-            titleStyle.isScrollEnabled = true;
-            titleStyle.isTitleScaling = true;
-            titleStyle.isBottomLineDisplayed = false;
-            titleStyle.isSliderDisplayed = false;
+            titleStyle.isScrollEnabled = YES;
+            titleStyle.isTitleScaling = YES;
+            titleStyle.isBottomLineDisplayed = NO;
+            titleStyle.isSliderDisplayed = NO;
             break;
         case 1:
-            titleStyle.isScrollEnabled = true;
-            titleStyle.isTitleScaling = false;
-            titleStyle.isBottomLineDisplayed = true;
-            titleStyle.isSliderDisplayed = false;
+            titleStyle.isScrollEnabled = YES;
+            titleStyle.isTitleScaling = NO;
+            titleStyle.isBottomLineDisplayed = YES;
+            titleStyle.isSliderDisplayed = NO;
             break;
         case 2:
-            titleStyle.isScrollEnabled = true;
-            titleStyle.isTitleScaling = false;
-            titleStyle.isBottomLineDisplayed = false;
-            titleStyle.isSliderDisplayed = true;
+            titleStyle.isScrollEnabled = YES;
+            titleStyle.isTitleScaling = NO;
+            titleStyle.isBottomLineDisplayed = NO;
+            titleStyle.isSliderDisplayed = YES;
             break;
         case 3:
-            titleStyle.isScrollEnabled = false;
-            titleStyle.isTitleScaling = true;
-            titleStyle.isBottomLineDisplayed = true;
-            titleStyle.isSliderDisplayed = false;
+            titleStyle.isScrollEnabled = NO;
+            titleStyle.isTitleScaling = YES;
+            titleStyle.isBottomLineDisplayed = YES;
+            titleStyle.isSliderDisplayed = NO;
             break;
         case 4:
-            titleStyle.isScrollEnabled = false;
-            titleStyle.isTitleScaling = true;
-            titleStyle.isBottomLineDisplayed = false;
-            titleStyle.isSliderDisplayed = true;
+            titleStyle.isScrollEnabled = NO;
+            titleStyle.isTitleScaling = YES;
+            titleStyle.isBottomLineDisplayed = NO;
+            titleStyle.isSliderDisplayed = YES;
             break;
         case 5:
-            titleStyle.isScrollEnabled = false;
+            titleStyle.isScrollEnabled = NO;
             titleStyle.isNavigationTitleView = YES;
             titleStyle.isTitleSeparatorLineDisplayed = YES;
             titleStyle.titleWitdh = 240;
             titleStyle.titleHeight = 36;
             titleStyle.borderWidth = 1;
             titleStyle.borderColor = [UIColor blackColor];
-            titleStyle.cornerRadius = 2;
+            titleStyle.cornerRadius = 5;
             break;
     }
     [self.navigationController pushViewController:[[TestViewController alloc] initWithTitleStyle:titleStyle] animated:YES];

@@ -59,22 +59,20 @@
 
 - (void)setupUI {
     CGRect titleFrame = CGRectZero;
+    CGRect contentFrame = CGRectZero;
     if (self.titleStyle.isNavigationTitleView) {
         titleFrame = CGRectMake(0, 0, self.titleStyle.titleWitdh, self.titleStyle.titleHeight);
+        contentFrame = CGRectMake(0, self.titleStyle.contentY, self.bounds.size.width, self.bounds.size.height - self.titleStyle.contentY);
     } else {
         titleFrame = CGRectMake(0, 0, self.bounds.size.width, self.titleStyle.titleHeight);
+        contentFrame = CGRectMake(0, CGRectGetMaxY(titleFrame), self.bounds.size.width, self.bounds.size.height - self.titleStyle.titleHeight);
     }
+    
     SRChannelsTitle *channelsTitle = [[SRChannelsTitle alloc] initWithFrame:titleFrame titles:self.titles titleStyle:self.titleStyle];
     channelsTitle.delegate = self;
     [self addSubview:channelsTitle];
     _channelsTitle = channelsTitle;
     
-    CGRect contentFrame = CGRectZero;
-    if (self.titleStyle.isNavigationTitleView) {
-        contentFrame = CGRectMake(0, self.titleStyle.contentY, self.bounds.size.width, self.bounds.size.height - self.titleStyle.contentY);
-    } else {
-        contentFrame = CGRectMake(0, CGRectGetMaxY(titleFrame), self.bounds.size.width, self.bounds.size.height - self.titleStyle.titleHeight);
-    }
     SRChannelsContent *channelsContent = [[SRChannelsContent alloc] initWithFrame:contentFrame childVCs:self.childVCs parentVC:self.parentVC];
     channelsContent.delegate = self;
     [self addSubview:channelsContent];

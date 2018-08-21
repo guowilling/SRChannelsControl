@@ -39,7 +39,6 @@ static NSString * const kContentCellID = @"contentCellID";
     for (UIViewController *vc in self.childVCs) {
         [self.parentVC addChildViewController:vc];
     }
-    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = self.bounds.size;
     layout.minimumLineSpacing = 0;
@@ -72,9 +71,9 @@ static NSString * const kContentCellID = @"contentCellID";
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
     }
-    UIViewController *vc = self.childVCs[indexPath.item];
-    vc.view.frame = cell.contentView.bounds;
-    [cell.contentView addSubview:vc.view];
+    UIViewController *childVC = self.childVCs[indexPath.item];
+    childVC.view.frame = cell.contentView.bounds;
+    [cell.contentView addSubview:childVC.view];
     return cell;
 }
 
@@ -82,10 +81,14 @@ static NSString * const kContentCellID = @"contentCellID";
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.disableScroll = NO;
+    
     self.startOffsetX = scrollView.contentOffset.x;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.disableScroll) {
+        return;
+    }
     int floorIndex = floor(scrollView.contentOffset.x / scrollView.frame.size.width);
     if (floorIndex < 0 || floorIndex > self.childVCs.count - 1) {
         return;

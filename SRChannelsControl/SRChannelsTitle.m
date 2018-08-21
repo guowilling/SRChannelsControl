@@ -57,8 +57,6 @@
     
     [self setupTitleLabels];
     
-    [self setupTitleLabelsFrame];
-    
     [self setupBottomLine];
     
     [self setupSlider];
@@ -69,11 +67,11 @@
     containerScrollView.frame = self.bounds;
     containerScrollView.showsHorizontalScrollIndicator = NO;
     containerScrollView.scrollsToTop = NO;
+    containerScrollView.layer.borderWidth = self.titleStyle.borderWidth;
+    containerScrollView.layer.borderColor = self.titleStyle.borderColor.CGColor;
+    containerScrollView.layer.cornerRadius = self.titleStyle.cornerRadius;
     [self addSubview:containerScrollView];
     _containerScrollView = containerScrollView;
-    _containerScrollView.layer.borderWidth = self.titleStyle.borderWidth;
-    _containerScrollView.layer.borderColor = self.titleStyle.borderColor.CGColor;
-    _containerScrollView.layer.cornerRadius = self.titleStyle.cornerRadius;
 }
 
 - (void)setupTitleLabels {
@@ -91,6 +89,7 @@
         [self.containerScrollView addSubview:titleLabel];
         [self.titleLabels addObject:titleLabel];
     }
+    [self setupTitleLabelsFrame];
 }
 
 - (void)setupTitleLabelsFrame {
@@ -177,7 +176,6 @@
     if (self.currentIndex == currentLabel.tag) {
         return;
     }
-    
     UILabel *lastLabel = self.titleLabels[self.currentIndex];
     lastLabel.textColor = self.titleStyle.titleNormalColor;
     currentLabel.textColor = self.titleStyle.titleSelectdColor;
@@ -187,7 +185,7 @@
         currentLabel.transform = lastLabel.transform;
         lastLabel.transform = CGAffineTransformIdentity;
     }
-    
+
     if (self.titleStyle.isBottomLineDisplayed) {
         CGRect frame = self.bottomLine.frame;
         frame.origin.x = currentLabel.frame.origin.x;
@@ -284,10 +282,11 @@
 
 - (void)didEndScrollAtIndex:(NSInteger)atIndex {
     UILabel *lastLabel = self.titleLabels[self.currentIndex];
-    UILabel *atLabel = self.titleLabels[atIndex];
     lastLabel.textColor = self.titleStyle.titleNormalColor;
-    atLabel.textColor = self.titleStyle.titleSelectdColor;
     lastLabel.backgroundColor = [UIColor clearColor];
+    
+    UILabel *atLabel = self.titleLabels[atIndex];
+    atLabel.textColor = self.titleStyle.titleSelectdColor;
     atLabel.backgroundColor = self.titleStyle.titleSelectdBgColor;
     
     self.currentIndex = atIndex;

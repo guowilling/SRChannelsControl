@@ -13,11 +13,12 @@
 
 + (instancetype)defaultChannelsTitleStyle {
     SRChannelsTitleStyle *style = [[SRChannelsTitleStyle alloc] init];
+    
     style.isNavigationTitleView = NO;
     style.isScrollEnabled = NO;
     
     style.titleHeight = 44.0;
-    style.titleWitdh = 0;
+    style.titleWitdh = 100.0;
     style.titleMargin = 20.0;
     style.titleFont = [UIFont systemFontOfSize:15.0];
     style.titleNormalColor = [UIColor sr_colorWithR:0 G:0 B:0];

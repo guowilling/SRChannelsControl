@@ -149,7 +149,7 @@
 				TargetAttributes = {
 					68DFAB501F4434A200D2EDE2 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = Y4FK8UXDXW;
+						DevelopmentTeam = L8C6M6B8E9;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -312,13 +312,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y4FK8UXDXW;
+				DEVELOPMENT_TEAM = L8C6M6B8E9;
 				INFOPLIST_FILE = SRChannelsControlDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRChannelsControlDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRChannelsControlDemo.ObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f3a55d34-a082-41a1-892a-f34e32cf7f46";
+				PROVISIONING_PROFILE = "41eaf476-bb76-4cb9-b2e9-b856cc3e9d97";
 				PROVISIONING_PROFILE_SPECIFIER = "PP For All";
 			};
 			name = Debug;
@@ -327,13 +327,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y4FK8UXDXW;
+				DEVELOPMENT_TEAM = L8C6M6B8E9;
 				INFOPLIST_FILE = SRChannelsControlDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRChannelsControlDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willing.SRChannelsControlDemo.ObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f3a55d34-a082-41a1-892a-f34e32cf7f46";
+				PROVISIONING_PROFILE = "41eaf476-bb76-4cb9-b2e9-b856cc3e9d97";
 				PROVISIONING_PROFILE_SPECIFIER = "PP For All";
 			};
 			name = Release;
